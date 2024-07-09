@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import json.vo.PersonVo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +53,7 @@ public class JSONParseAction extends HttpServlet {
 		}
 		*/
 		
+		List<PersonVo> p_list = new ArrayList<PersonVo>();
 		
 		try {
 			String str_url = "http://localhost:8080/2024_0709_JSONTest/person.jsp";
@@ -73,12 +77,32 @@ public class JSONParseAction extends HttpServlet {
 				sb.append(data);
 			}//end:while()
 			
-			System.out.println(sb.toString());
+			//System.out.println(sb.toString());
+			//JSON Parsing
+			JSONObject json = new JSONObject(sb.toString());
+			int size = json.getInt("size");
+			JSONArray personArray = json.getJSONArray("list");
+			for(int i = 0; i < personArray.length(); i++) {
+				
+				JSONObject person = personArray.getJSONObject(i);
+				//person = {"name":"일길동","age":31,"tel":"010-1111-1234"}
+				String name = person.getString("name");
+				int		age = person.getInt("age");
+				String	tel = person.getString("tel");
+				
+				PersonVo vo = new PersonVo(name, age, tel);
+				p_list.add(vo);
+			}
+			
+			
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//request binding
+		request.setAttribute("p_list", p_list);
 		
 
 		//Dispatcher형식으로 호출
