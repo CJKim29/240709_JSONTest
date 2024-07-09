@@ -60,7 +60,7 @@ public class KakaoSearchAction extends HttpServlet {
 		String x = request.getParameter("longitude");
 		
 		// Kakao 검색
-		List<KakaoLocalVo> list = KakaoSearchUtils.searchJson(query, y, x, page, size, radius);
+		List<KakaoLocalVo> list = KakaoSearchUtils.searchXml(query, y, x, page, size, radius);
 		
 		//request binding
 		request.setAttribute("list", list);
