@@ -122,7 +122,7 @@ public class KakaoSearchUtils {
 			SAXBuilder	builder = new SAXBuilder();
 			Document	doc		= builder.build(urlConn.getInputStream());
 			
-			Element		root	= doc.getRootElement();
+			Element		root	= doc.getRootElement(); //<result>
 			
 			List<Element> document_list = root.getChildren("documents");
 			
