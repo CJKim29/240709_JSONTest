@@ -88,7 +88,7 @@ public class KakaoSearchUtils {
 				
 				//ArrayList에 추가
 				list.add(vo);
-			}
+			}//end:for()
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -153,9 +153,7 @@ public class KakaoSearchUtils {
 				vo.setDistance(distance);
 				
 				list.add(vo);
-			}
-			
-			
+			}//end:for()
 			
 			
 		} catch (Exception e) {
@@ -163,12 +161,7 @@ public class KakaoSearchUtils {
 			e.printStackTrace();
 		}
 		
-		
 		return list;
 	}
-	
-	
-	
-	
 	
 }
